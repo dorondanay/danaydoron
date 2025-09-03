@@ -6,7 +6,7 @@
   <title>דורון דנאי — אתר אישי</title>
   <meta name="description" content="דורון דנאי — אימון אישי, הרצאות וספרים. יצירת קשר: danaydoron@gmail.com">
 
-  <!-- מניעת קאש כדי שלא תיטען גרסה ישנה -->
+  <!-- למנוע קאש של גרסה ישנה -->
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
   <meta http-equiv="Pragma" content="no-cache"/>
   <meta http-equiv="Expires" content="0"/>
@@ -18,16 +18,11 @@
       --btn:#fff; --btnbg:rgba(0,0,0,.5); --btnbr:rgba(255,255,255,.6);
     }
     *{box-sizing:border-box}
-    html,body{margin:0;height:100%;background:#000;
-      font-family:system-ui,"Segoe UI",Arial,Helvetica,sans-serif}
+    html,body{margin:0;height:100%;background:#000;font-family:system-ui,"Segoe UI",Arial,Helvetica,sans-serif}
 
     /* מסך הבית: בלי חיתוך */
     .stage{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden;background:#000}
     .stage>img{width:100vw;height:100vh;object-fit:contain;display:block}
-
-    /* רמזי מקשים */
-    .hints{position:fixed;bottom:14px;left:14px;right:14px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;background:rgba(0,0,0,.45);color:#fff;border-radius:12px;padding:10px 14px;backdrop-filter:blur(4px);font-size:14px}
-    .kbd{display:inline-flex;min-width:1.9em;justify-content:center;align-items:center;padding:2px 8px;border-radius:8px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);font-weight:700;margin-inline:6px}
 
     /* חלונות */
     .overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:var(--ov);animation:fade .18s ease-out}
@@ -60,27 +55,20 @@
     .primary{background:var(--accent);color:#fff;border:none}
     .muted{color:var(--muted)} .note{margin-top:6px;font-size:13px}
 
-    /* בטחון: גם אם נשארה שורת בחירה ישנה — להסתיר בכוח */
-    .numbar,.chip{display:none !important}
+    /* ביטול מוחלט של כל שורת בחירה ישנה אם נשארה בטעות */
+    .numbar,.chip,.hints{display:none !important}
 
     /* תווית גרסה לבדיקה */
     .build{position:fixed;top:8px;right:10px;color:#fff;background:rgba(0,0,0,.5);padding:4px 8px;border-radius:8px;font:12px/1.2 monospace;z-index:20}
   </style>
 </head>
 <body>
-  <div class="build">BUILD: PTM-5</div>
+  <div class="build">BUILD: PTM-6</div>
 
   <!-- מסך הבית -->
   <main class="stage" aria-label="Master Page">
-    <img src="MASTER PAGE.jpg?v=PTM5" alt="דורון דנאי — מסך ראשי">
+    <img src="MASTER PAGE.jpg?v=PTM6" alt="דורון דנאי — מסך ראשי">
   </main>
-
-  <div class="hints" aria-hidden="true">
-    <span><span class="kbd">1</span> אימון אישי (PT)</span>
-    <span><span class="kbd">2</span> הרצאות ושיחות (Talks)</span>
-    <span><span class="kbd">3</span> ספרים (Books)</span>
-    <span class="muted">חזרה/סגירה: <span class="kbd">Esc</span></span>
-  </div>
 
   <!-- PT MASTER: 1→PTS, 2→PT -->
   <section id="ov-ptmaster" class="overlay" role="dialog" aria-modal="true">
@@ -89,7 +77,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="אימון אישי — PT MASTER">השארת פרטים</button>
       </div>
-      <img src="PT MASTER.jpg?v=PTM5" alt="PT MASTER">
+      <img src="PT MASTER.jpg?v=PTM6" alt="PT MASTER">
     </div>
   </section>
 
@@ -100,7 +88,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="אימון אישי — PT">השארת פרטים</button>
       </div>
-      <img src="PT.jpg?v=PTM5" alt="PT">
+      <img src="PT.jpg?v=PTM6" alt="PT">
     </div>
   </section>
 
@@ -111,7 +99,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="הרצאות ושיחות — מסך בחירה">השארת פרטים</button>
       </div>
-      <img src="TALKS MASTER.jpg?v=PTM5" alt="Talks">
+      <img src="TALKS MASTER.jpg?v=PTM6" alt="Talks">
     </div>
   </section>
 
@@ -122,7 +110,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="ספרים — מסך בחירה">השארת פרטים</button>
       </div>
-      <img src="MASTER BOOKS.jpg?v=PTM5" alt="Books">
+      <img src="MASTER BOOKS.jpg?v=PTM6" alt="Books">
     </div>
   </section>
   <!-- PT ► PTS -->
@@ -132,7 +120,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="אימון אישי — הצעה מיוחדת">השארת פרטים</button>
       </div>
-      <img src="PTS.jpg?v=PTM5" alt="PTS">
+      <img src="PTS.jpg?v=PTM6" alt="PTS">
     </div>
   </section>
 
@@ -157,7 +145,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="הרצאה — תרבות הבטיחות">השארת פרטים</button>
       </div>
-      <img src="SAFETY.jpg?v=PTM5" alt="Safety Culture">
+      <img src="SAFETY.jpg?v=PTM6" alt="Safety Culture">
     </div>
   </section>
 
@@ -168,7 +156,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="שיחה — התפקחות מאשליות החיים">השארת פרטים</button>
       </div>
-      <img src="THATS LIFE.jpg?v=PTM5" alt="That's Life">
+      <img src="THATS LIFE.jpg?v=PTM6" alt="That's Life">
     </div>
   </section>
 
@@ -179,7 +167,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="ספר — כנפיים שחוקות">השארת פרטים</button>
       </div>
-      <img src="WORN WINGS.jpg?v=PTM5" alt="Worn Wings">
+      <img src="WORN WINGS.jpg?v=PTM6" alt="Worn Wings">
     </div>
   </section>
 
@@ -190,7 +178,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="ספר — כנפיים">השארת פרטים</button>
       </div>
-      <img src="WINGS.jpg?v=PTM5" alt="Wings">
+      <img src="WINGS.jpg?v=PTM6" alt="Wings">
     </div>
   </section>
 
@@ -201,7 +189,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="ספר — צמד חמד">השארת פרטים</button>
       </div>
-      <img src="TWINS.jpg?v=PTM5" alt="Twins">
+      <img src="TWINS.jpg?v=PTM6" alt="Twins">
     </div>
   </section>
 
@@ -212,8 +200,31 @@
       <p class="muted" id="contextLine"></p>
 
       <label for="name">שם מלא</label>
-      <input id="name" name="name"
+      <input id="name" name="name" required placeholder="שם ושם משפחה"/>
+
+      <div class="row">
+        <div>
+          <label for="phone">טלפון</label>
+          <input id="phone" name="phone" type="tel" placeholder="054-XXXXXXX"/>
+        </div>
+        <div>
+          <label for="email">מייל</label>
+          <input id="email" name="email" type="email" placeholder="name@example.com"/>
+        </div>
+      </div>
+
+      <label for="message">הודעה</label>
+      <textarea id="message" name="message" placeholder="פרטים חופשיים..."></textarea>
+
+      <div class="form-actions">
+        <button type="submit" class="btn primary">שליחה</button>
+        <button type="button" class="btn" id="cancelForm">ביטול</button>
+      </div>
+      <p class="note muted">הטופס נשלח במייל (mailto) — ללא שרת.</p>
+    </form>
+  </section>
   <script>
+  // בוחר נוח
   const $ = (s)=>document.querySelector(s);
 
   // בית → מסכי בחירה
@@ -281,19 +292,17 @@
     openForm(lastOrigin);
   }));
 
-  // ניווט מקלדת בלבד
-  window.addEventListener('keydown',(e)=>{
-    // תמיכה גם במקשי נומריק-פד
-    const numpadMap = { Numpad1:'1', Numpad2:'2', Numpad3:'3', Numpad4:'4' };
-    const key = numpadMap[e.code] || e.key;
+  // מאזינים למקלדת (גם ל-window וגם ל-document ליתר בטחון)
+  function onKey(e){
+    // תמיכה גם בנומריק-פד
+    const map = { Numpad1:'1', Numpad2:'2', Numpad3:'3', Numpad4:'4' };
+    const key = map[e.code] || e.key;
 
     if(key==='Escape'){ goBack(); return; }
 
     // בית → בחירה ראשית
     if(!active && ['1','2','3'].includes(key)){
-      e.preventDefault();
-      openOverlay(overlays[key]); 
-      return;
+      e.preventDefault(); openOverlay(overlays[key]); return;
     }
 
     // PT MASTER
@@ -336,10 +345,11 @@
       return;
     }
     if(active===modals.reels && ['1','2','3','4'].includes(key)){
-      e.preventDefault(); openExternal('REEL'+key); 
-      return;
+      e.preventDefault(); openExternal('REEL'+key); return;
     }
-  });
+  }
+  window.addEventListener('keydown', onKey);
+  document.addEventListener('keydown', onKey);
 
   function openExternal(key){
     const url = LINKS[key];
@@ -366,3 +376,4 @@
   </script>
 </body>
 </html>
+
