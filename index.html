@@ -1,81 +1,340 @@
 <!doctype html>
-window.__NAV_INSTALLED = true;
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>דורון דנאי — אתר אישי</title>
+  <meta name="description" content="דורון דנאי — אימון אישי, הרצאות ושיחות, ספרים. יצירת קשר: danaydoron@gmail.com">
 
+  <!-- למנוע קאש של גרסאות ישנות -->
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+  <meta http-equiv="Pragma" content="no-cache"/>
+  <meta http-equiv="Expires" content="0"/>
 
-window.addEventListener('keydown', (e)=>{
-const map = { Numpad1:'1', Numpad2:'2', Numpad3:'3', Numpad4:'4' };
-const k = map[e.code] || e.key;
+  <style>
+    :root{ --ov:rgba(0,0,0,.75); --btn:#fff; --btnbg:rgba(0,0,0,.5); --btnbr:rgba(255,255,255,.6);
+           --card:rgba(255,255,255,.96); --muted:#6b7280; --accent:#0ea5e9; }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:#000;font-family:system-ui,"Segoe UI",Arial,Helvetica,sans-serif}
 
+    /* מסך הבית: תמונה מלאה בלי חיתוך */
+    .stage{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden;background:#000}
+    .stage>img{width:100vw;height:100vh;object-fit:contain;display:block}
 
-if(k==='Escape'){ e.preventDefault(); goBack(); return; }
+    /* חלונות קופצים */
+    .overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:var(--ov)}
+    .overlay.active{display:flex}
+    .panel{position:relative;display:flex;align-items:center;justify-content:center;width:min(96vw,1200px);max-height:92vh;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+    .panel img{max-width:100%;max-height:88vh;width:auto;height:auto;object-fit:contain;display:block}
 
+    /* כפתורי שליטה */
+    .controls{position:absolute;top:10px;left:10px;display:flex;gap:8px;z-index:10}
+    .btn{appearance:none;border:1px solid var(--btnbr);background:var(--btnbg);color:var(--btn);
+         padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer;backdrop-filter:blur(2px)}
+    .btn:hover{background:rgba(255,255,255,.12)}
 
-// בית → PTM / TALKS / BOOKS
-if(!active && ['1','2','3'].includes(k)){ e.preventDefault(); openOverlay(overlays[k]); return; }
+    /* טופס יצירת קשר */
+    .form-ov{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:var(--ov)}
+    .form-ov.active{display:flex}
+    form{width:min(92vw,680px);background:var(--card);border-radius:18px;padding:22px 22px 16px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+    form h2{margin:0 0 12px;font-size:clamp(22px,3vw,28px)}
+    label{display:block;font-weight:600;margin:12px 0 6px}
+    input,textarea{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:10px;font-size:16px}
+    textarea{min-height:120px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .form-actions{display:flex;gap:10px;justify-content:flex-start;margin-top:14px}
+    .primary{background:var(--accent);color:#fff;border:none}
+    .muted{color:var(--muted)} .note{margin-top:6px;font-size:13px}
 
+    /* לוודא שאין שורת בחירה ישנה */
+    .numbar,.chip,.hints{display:none !important;pointer-events:none !important}
 
-// PTM: 1→PTS, 2→REELS
-if(active===$('#ov-ptm')){
-if(k==='1'){ e.preventDefault(); openOverlay(modals.pts); return; }
-if(k==='2'){ e.preventDefault(); openOverlay(modals.reels); return; }
-}
+    /* חותמת גרסה */
+    .build{position:fixed;top:8px;right:10px;color:#fff;background:rgba(0,0,0,.5);padding:4px 8px;border-radius:8px;font:12px/1.2 monospace;z-index:20}
+  </style>
+</head>
+<body>
+  <div class="build">BUILD: RESET-1</div>
 
+  <!-- מסך הבית -->
+<main class="stage" aria-label="Master Page">
+  <img src="MASTER PAGE.jpg?v=R4" alt="מסך ראשי">
+</main>
 
-// TALKS: 1→SAFETY, 2→THATS LIFE
-if(active===$('#ov-talks')){
-if(k==='1'){ e.preventDefault(); openOverlay(modals.talkSafety); return; }
-if(k==='2'){ e.preventDefault(); openOverlay(modals.talkLife); return; }
-}
+  <!-- PTM -->
+  <section id="ov-ptm" class="overlay" role="dialog" aria-modal="true">
+    <div class="panel">
+      <div class="controls">
+        <button class="btn" data-back>סיום</button>
+        <button class="btn" data-contact data-origin="אימון אישי — PTM">השארת פרטים</button>
+      </div>
+      <img src="PTM.jpg?v=R1" alt="PTM">
+    </div>
+  </section>
 
+  <!-- TALKS -->
+  <section id="ov-talks" class="overlay" role="dialog" aria-modal="true">
+    <div class="panel">
+      <div class="controls">
+        <button class="btn" data-back>סיום</button>
+        <button class="btn" data-contact data-origin="הרצאות ושיחות — TALKS">השארת פרטים</button>
+      </div>
+      <img src="TALKS.jpg?v=R1" alt="TALKS">
+    </div>
+  </section>
 
-// BOOKS: 1=WORN WINGS, 2=TWINS, 3=WINGS
-if(active===$('#ov-books')){
-if(k==='1'){ e.preventDefault(); openOverlay(modals.bookWorn); return; }
-if(k==='2'){ e.preventDefault(); openOverlay(modals.bookTwins); return; }
-if(k==='3'){ e.preventDefault(); openOverlay(modals.bookWings); return; }
-}
+  <!-- BOOKS -->
+  <section id="ov-books" class="overlay" role="dialog" aria-modal="true">
+    <div class="panel">
+      <div class="controls">
+        <button class="btn" data-back>סיום</button>
+        <button class="btn" data-contact data-origin="ספרים — BOOKS">השארת פרטים</button>
+      </div>
+      <img src="BOOKS.jpg?v=R1" alt="BOOKS">
+    </div>
+  </section>
+  <!-- PTS -->
+  <section id="ov-pts" class="overlay" role="dialog" aria-modal="true">
+    <div class="panel">
+      <div class="controls">
+        <button class="btn" data-back>סיום</button>
+        <button class="btn" data-contact data-origin="אימון אישי — PTS">השארת פרטים</button>
+      </div>
+      <img src="PTS.jpg?v=R1" alt="PTS">
+    </div>
+  </section>
 
+  <!-- REELS (תמונה + מקשים 1..4) -->
+  <section id="ov-reels" class="overlay" role="dialog" aria-modal="true">
+    <div class="panel">
+      <div class="controls">
+        <button class="btn" data-back>סיום</button>
+        <button class="btn" data-contact data-origin="אימון אישי — REELS">השארת פרטים</button>
+      </div>
+      <img src="REELS.jpg?v=R1" alt="REELS">
+    </div>
+  </section>
 
-// בתוך WORN WINGS
-if(active===modals.bookWorn){
-if(k==='1'){ e.preventDefault(); window.open(LINKS.WORN_SECURE,'_blank'); return; }
-if(k==='2'){ e.preventDefault(); window.open(LINKS.WORN_IBRIT,'_blank'); return; }
-}
+  <!-- SAFETY -->
+  <section id="talk-safety" class="overlay" role="dialog" aria-modal="true">
+    <div class="panel">
+      <div class="controls">
+        <button class="btn" data-back>סיום</button>
+        <button class="btn" data-contact data-origin="הרצאה — SAFETY">השארת פרטים</button>
+      </div>
+      <img src="SAFETY.jpg?v=R1" alt="SAFETY">
+    </div>
+  </section>
 
+  <!-- THATS LIFE -->
+  <section id="talk-life" class="overlay" role="dialog" aria-modal="true">
+    <div class="panel">
+      <div class="controls">
+        <button class="btn" data-back>סיום</button>
+        <button class="btn" data-contact data-origin="שיחה — THATS LIFE">השארת פרטים</button>
+      </div>
+      <img src="THATS LIFE.jpg?v=R1" alt="THATS LIFE">
+    </div>
+  </section>
 
-// בתוך TWINS
-if(active===modals.bookTwins && k==='1'){
-e.preventDefault(); window.open(LINKS.TWINS_SECURE,'_blank'); return;
-}
+  <!-- WORN WINGS (סגירה בלבד + מקשים 1/2 ללינקים) -->
+  <section id="book-worn" class="overlay" role="dialog" aria-modal="true">
+    <div class="panel">
+      <div class="controls">
+        <button class="btn" data-back>סיום</button>
+      </div>
+      <img src="WORN WINGS.jpg?v=R1" alt="WORN WINGS">
+    </div>
+  </section>
 
+  <!-- TWINS (סגירה בלבד + מקש 1 ללינק) -->
+  <section id="book-twins" class="overlay" role="dialog" aria-modal="true">
+    <div class="panel">
+      <div class="controls">
+        <button class="btn" data-back>סיום</button>
+      </div>
+      <img src="TWINS.jpg?v=R1" alt="TWINS">
+    </div>
+  </section>
 
-// בתוך REELS
-if(active===modals.reels && ['1','2','3','4'].includes(k)){
-e.preventDefault(); window.open(LINKS['REEL'+k],'_blank'); return;
-}
-});
-})();
+  <!-- WINGS (סגירה בלבד) -->
+  <section id="book-wings" class="overlay" role="dialog" aria-modal="true">
+    <div class="panel">
+      <div class="controls">
+        <button class="btn" data-back>סיום</button>
+      </div>
+      <img src="WINGS.jpg?v=R1" alt="WINGS">
+    </div>
+  </section>
 
+  <!-- טופס יצירת קשר -->
+  <section id="contact" class="form-ov" role="dialog" aria-modal="true">
+    <form id="contactForm">
+      <h2>טופס יצירת קשר</h2>
+      <p class="muted" id="contextLine"></p>
 
-/* --- טופס (mailto) --- */
-const contactOv = $('#contact'), form = $('#contactForm'), ctxLine = $('#contextLine');
-function openForm(origin=''){ ctxLine.textContent = origin ? `הקשר הפניה: ${origin}` : ''; contactOv.classList.add('active'); }
-function closeForm(){ contactOv.classList.remove('active'); }
-$('#cancelForm').addEventListener('click', closeForm);
-contactOv.addEventListener('click', (ev)=>{ if(ev.target===contactOv) closeForm(); });
-form.addEventListener('submit', (e)=>{
-e.preventDefault();
-const name=$('#name').value.trim(), phone=$('#phone').value.trim(), email=$('#email').value.trim(), msg=$('#message').value.trim();
-const subject=encodeURIComponent(`פניה מהאתר — ${lastOrigin||'ללא הקשר'}`);
-const body=encodeURIComponent(`שם: ${name}\nטלפון: ${phone}\nמייל: ${email}\n\nהודעה:\n${msg}`);
-window.location.href=`mailto:danaydoron@gmail.com?subject=${subject}&body=${body}`;
-});
+      <label for="name">שם מלא</label>
+      <input id="name" name="name" required placeholder="שם ושם משפחה"/>
 
+      <div class="row">
+        <div>
+          <label for="phone">טלפון</label>
+          <input id="phone" name="phone" type="tel" placeholder="054-XXXXXXX"/>
+        </div>
+        <div>
+          <label for="email">מייל</label>
+          <input id="email" name="email" type="email" placeholder="name@example.com"/>
+        </div>
+      </div>
 
-// מניעת גרירת תמונות
-document.addEventListener('dragstart', e=>e.preventDefault());
-</script>
+      <label for="message">הודעה</label>
+      <textarea id="message" name="message" placeholder="פרטים חופשיים..."></textarea>
+
+      <div class="form-actions">
+        <button type="submit" class="btn primary">שליחה</button>
+        <button type="button" class="btn" id="cancelForm">ביטול</button>
+      </div>
+      <p class="note muted">הטופס נשלח במייל (mailto) — ללא שרת.</p>
+    </form>
+  </section>
+  <script>
+  const $ = (s)=>document.querySelector(s);
+
+  // מסכי בחירה מהבית (MASTER PAGE)
+  const overlays = {
+    '1': $('#ov-ptm'),     // PTM
+    '2': $('#ov-talks'),   // TALKS
+    '3': $('#ov-books'),   // BOOKS
+  };
+
+  // תתי-מסכים
+  const modals = {
+    pts:  $('#ov-pts'),
+    reels:$('#ov-reels'),
+    talkSafety: $('#talk-safety'),
+    talkLife:   $('#talk-life'),
+    bookWorn:   $('#book-worn'),
+    bookTwins:  $('#book-twins'),
+    bookWings:  $('#book-wings'),
+  };
+
+  // קישורים חיצוניים (לפי שסיכמנו)
+  const LINKS = {
+    WORN_SECURE: 'https://meshulam.co.il/purchase?b=8dfe116b4b9a656246375c897a49d9a4&fbclid=IwY2xjawMk4G9leHRuA2FlbQIxMABicmlkETFZZnB2Nng2YkMwRHpaNkY5AR71cWa5G75BBBYf3k6ldZ-gj1lPlOyJAFQo2M8Tnn8zFLwVJbWeVNdD6DXHng_aem_Vcth-GPqGkc0nkjqNEbYjg',
+    WORN_IBRIT:  'https://www.e-vrit.co.il/Product/23651/%D7%9B%D7%A0%D7%A4%D7%99%D7%99%D7%9D_%D7%A9%D7%97%D7%95%D7%A7%D7%95%D7%AA',
+    TWINS_SECURE:'https://meshulam.co.il/purchase?b=cdb8abab38e7c0d22aa888136a3e4515&fbclid=IwY2xjawMk4L1leHRuA2FlbQIxMABicmlkETFZZnB2Nng2YkMwRHpaNkY5AR71cWa5G75BBBYf3k6ldZ-gj1lPlOyJAFQo2M8Tnn8zFLwVJbWeVNdD6DXHng_aem_Vcth-GPqGkc0nkjqNEbYjg',
+    REEL1: 'https://www.facebook.com/reel/2012378712628840',
+    REEL2: 'https://www.facebook.com/reel/1081715494101033',
+    REEL3: 'https://www.facebook.com/reel/634927712225406',
+    REEL4: 'https://www.facebook.com/reel/1081715494101033'
+  };
+
+  // היסטוריה + מנעול כפילויות
+  let active = null;
+  const historyStack = [];
+  let navLock = false;
+
+  function show(el){ el.classList.add('active'); }
+  function hide(el){ el.classList.remove('active'); }
+
+  function openOverlay(el){
+    if(navLock) return;
+    navLock = true; setTimeout(()=>navLock=false, 200);
+    if(active){ historyStack.push(active); hide(active); }
+    show(el); active = el;
+  }
+
+  function goBack(){
+    if($('#contact').classList.contains('active')) { closeForm(); return; }
+    if(!active){ return; }
+    hide(active);
+    active = historyStack.pop() || null;
+    if(active){ show(active); }
+  }
+
+  // “סיום” וקליק מחוץ
+  document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click', goBack));
+  document.querySelectorAll('.overlay').forEach(ov=>{
+    ov.addEventListener('click',(ev)=>{ if(ev.target===ov) goBack(); });
+  });
+
+  // פתיחת טופס יצירת קשר
+  let lastOrigin = '';
+  document.querySelectorAll('[data-contact]').forEach(b=>b.addEventListener('click', ()=>{
+    lastOrigin = b.getAttribute('data-origin') || '';
+    openForm(lastOrigin);
+  }));
+
+  // מאזין מקלדת (מותקן פעם אחת בלבד)
+  (function installKeyboard(){
+    if(window.__NAV_INSTALLED) return;
+    window.__NAV_INSTALLED = true;
+
+    window.addEventListener('keydown', (e)=>{
+      const map = { Numpad1:'1', Numpad2:'2', Numpad3:'3', Numpad4:'4' };
+      const k = map[e.code] || e.key;
+
+      if(k==='Escape'){ e.preventDefault(); goBack(); return; }
+
+      // בית → PTM / TALKS / BOOKS
+      if(!active && ['1','2','3'].includes(k)){ e.preventDefault(); openOverlay(overlays[k]); return; }
+
+      // PTM: 1→PTS, 2→REELS
+      if(active===$('#ov-ptm')){
+        if(k==='1'){ e.preventDefault(); openOverlay(modals.pts); return; }
+        if(k==='2'){ e.preventDefault(); openOverlay(modals.reels); return; }
+      }
+
+      // TALKS: 1→SAFETY, 2→THATS LIFE
+      if(active===$('#ov-talks')){
+        if(k==='1'){ e.preventDefault(); openOverlay(modals.talkSafety); return; }
+        if(k==='2'){ e.preventDefault(); openOverlay(modals.talkLife);   return; }
+      }
+
+      // BOOKS: 1=WORN WINGS, 2=TWINS, 3=WINGS
+      if(active===$('#ov-books')){
+        if(k==='1'){ e.preventDefault(); openOverlay(modals.bookWorn);  return; }
+        if(k==='2'){ e.preventDefault(); openOverlay(modals.bookTwins); return; }
+        if(k==='3'){ e.preventDefault(); openOverlay(modals.bookWings); return; }
+      }
+
+      // בתוך WORN WINGS
+      if(active===modals.bookWorn){
+        if(k==='1'){ e.preventDefault(); window.open(LINKS.WORN_SECURE,'_blank'); return; }
+        if(k==='2'){ e.preventDefault(); window.open(LINKS.WORN_IBRIT,'_blank');  return; }
+      }
+
+      // בתוך TWINS
+      if(active===modals.bookTwins && k==='1'){
+        e.preventDefault(); window.open(LINKS.TWINS_SECURE,'_blank'); return;
+      }
+
+      // בתוך REELS
+      if(active===modals.reels && ['1','2','3','4'].includes(k)){
+        e.preventDefault(); window.open(LINKS['REEL'+k],'_blank'); return;
+      }
+    });
+  })();
+
+  /* --- טופס (mailto) --- */
+  const contactOv = $('#contact'), form = $('#contactForm'), ctxLine = $('#contextLine');
+  function openForm(origin=''){ ctxLine.textContent = origin ? `הקשר הפניה: ${origin}` : ''; contactOv.classList.add('active'); }
+  function closeForm(){ contactOv.classList.remove('active'); }
+  $('#cancelForm').addEventListener('click', closeForm);
+  contactOv.addEventListener('click', (ev)=>{ if(ev.target===contactOv) closeForm(); });
+  form.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const name=$('#name').value.trim(), phone=$('#phone').value.trim(), email=$('#email').value.trim(), msg=$('#message').value.trim();
+    const subject=encodeURIComponent(`פניה מהאתר — ${lastOrigin||'ללא הקשר'}`);
+    const body=encodeURIComponent(`שם: ${name}\nטלפון: ${phone}\nמייל: ${email}\n\nהודעה:\n${msg}`);
+    window.location.href=`mailto:danaydoron@gmail.com?subject=${subject}&body=${body}`;
+  });
+
+  // מניעת גרירת תמונות
+  document.addEventListener('dragstart', e=>e.preventDefault());
+  </script>
 </body>
 </html>
+
 
 
