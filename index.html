@@ -29,7 +29,7 @@
     .overlay.active{display:flex}
     @keyframes fade{from{opacity:0}to{opacity:1}}
 
-    /* פנל תמונה – בלי חיתוך, מעליו כפתורים/צ'יפים */
+    /* פנל תמונה – בלי חיתוך, במרכז, כפתורים מעל */
     .panel{
       position:relative;display:flex;align-items:center;justify-content:center;
       width:min(96vw,1200px);max-height:92vh;border-radius:18px;overflow:hidden;
@@ -41,11 +41,6 @@
     .controls{position:absolute;top:10px;left:10px;display:flex;gap:8px;z-index:10}
     .btn{appearance:none;border:1px solid var(--btnbr);background:var(--btnbg);color:var(--btn);padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer;backdrop-filter:blur(2px)}
     .btn:hover{background:rgba(255,255,255,.12)}
-
-    /* שורת בחירה במספרים */
-    .numbar{position:absolute;bottom:10px;left:10px;right:10px;display:flex;gap:12px;justify-content:center;background:rgba(0,0,0,.45);border-radius:12px;padding:8px 12px;color:#fff;font-size:14px;z-index:9;pointer-events:auto}
-    .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 10px;background:rgba(255,255,255,.14);cursor:pointer;user-select:none}
-    .chip:focus,.chip:hover{outline:2px solid rgba(255,255,255,.5)}
 
     /* טופס */
     .form-ov{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:var(--ov)}
@@ -65,32 +60,28 @@
   </style>
 </head>
 <body>
-  <div class="build">BUILD: PTM-2</div>
+  <div class="build">BUILD: PTM-3</div>
 
   <!-- מסך הבית -->
   <main class="stage" aria-label="Master Page">
-    <img src="MASTER PAGE.jpg?v=PTM2" alt="דורון דנאי — מסך ראשי">
+    <img src="MASTER PAGE.jpg?v=PTM3" alt="דורון דנאי — מסך ראשי">
   </main>
 
   <div class="hints" aria-hidden="true">
     <span><span class="kbd">1</span> אימון אישי (PT)</span>
     <span><span class="kbd">2</span> הרצאות ושיחות (Talks)</span>
     <span><span class="kbd">3</span> ספרים (Books)</span>
-    <span class="muted">סגירה: <span class="kbd">Esc</span></span>
+    <span class="muted">חזרה/סגירה: <span class="kbd">Esc</span></span>
   </div>
 
   <!-- PT MASTER: 1→PTS, 2→PT -->
   <section id="ov-ptmaster" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
-        <button class="btn" data-close>סיום</button>
+        <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="אימון אישי — PT MASTER">השארת פרטים</button>
       </div>
-      <img src="PT MASTER.jpg?v=PTM2" alt="PT MASTER">
-      <div class="numbar">
-        <div class="chip" role="button" tabindex="0" data-open="#ov-pts"><span class="kbd">1</span> הצעה מיוחדת</div>
-        <div class="chip" role="button" tabindex="0" data-open="#ov-pt"><span class="kbd">2</span> סרטונים (דרך PT)</div>
-      </div>
+      <img src="PT MASTER.jpg?v=PTM3" alt="PT MASTER">
     </div>
   </section>
 
@@ -98,14 +89,10 @@
   <section id="ov-pt" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
-        <button class="btn" data-close>סיום</button>
+        <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="אימון אישי — PT">השארת פרטים</button>
       </div>
-      <img src="PT.jpg?v=PTM2" alt="PT">
-      <div class="numbar">
-        <div class="chip" role="button" tabindex="0" data-open="#ov-pts"><span class="kbd">1</span> הצעה מיוחדת</div>
-        <div class="chip" role="button" tabindex="0" data-open="#ov-reels"><span class="kbd">2</span> סרטונים Reels</div>
-      </div>
+      <img src="PT.jpg?v=PTM3" alt="PT">
     </div>
   </section>
 
@@ -113,14 +100,10 @@
   <section id="ov-talks" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
-        <button class="btn" data-close>סיום</button>
+        <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="הרצאות ושיחות — מסך בחירה">השארת פרטים</button>
       </div>
-      <img src="TALKS MASTER.jpg?v=PTM2" alt="Talks">
-      <div class="numbar">
-        <div class="chip" role="button" tabindex="0" data-open="#talk-safety"><span class="kbd">1</span> תרבות הבטיחות</div>
-        <div class="chip" role="button" tabindex="0" data-open="#talk-life"><span class="kbd">2</span> התפקחות מאשליות החיים</div>
-      </div>
+      <img src="TALKS MASTER.jpg?v=PTM3" alt="Talks">
     </div>
   </section>
 
@@ -128,45 +111,33 @@
   <section id="ov-books" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
-        <button class="btn" data-close>סיום</button>
+        <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="ספרים — מסך בחירה">השארת פרטים</button>
       </div>
-      <img src="MASTER BOOKS.jpg?v=PTM2" alt="Books">
-      <div class="numbar">
-        <div class="chip" role="button" tabindex="0" data-open="#book-worn"><span class="kbd">1</span> כנפיים שחוקות</div>
-        <div class="chip" role="button" tabindex="0" data-open="#book-wings"><span class="kbd">2</span> כנפיים</div>
-        <div class="chip" role="button" tabindex="0" data-open="#book-twins"><span class="kbd">3</span> צמד חמד</div>
-      </div>
+      <img src="MASTER BOOKS.jpg?v=PTM3" alt="Books">
     </div>
   </section>
   <!-- PT ► PTS -->
   <section id="ov-pts" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
-        <button class="btn" data-close>סיום</button>
+        <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="אימון אישי — הצעה מיוחדת">השארת פרטים</button>
       </div>
-      <img src="PTS.jpg?v=PTM2" alt="PTS">
+      <img src="PTS.jpg?v=PTM3" alt="PTS">
     </div>
   </section>
 
-  <!-- PT ► REELS -->
+  <!-- PT ► REELS (רק מקשים 1..4, ללא כפתורי בחירה) -->
   <section id="ov-reels" class="overlay" role="dialog" aria-modal="true">
     <div class="panel" style="background:#111;color:#fff">
       <div class="controls">
-        <button class="btn" data-close>סיום</button>
+        <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="אימון אישי — Reels">השארת פרטים</button>
       </div>
-      <div style="padding:26px 22px 18px">
-        <h2 style="margin:0 0 12px;font-size:clamp(22px,3vw,28px)">סרטונים — Reels</h2>
-        <p style="margin:0 0 18px;opacity:.8">בחר מספר או לחץ על הכפתור:</p>
-        <div style="display:grid;gap:10px">
-          <button class="btn" data-open-link="REEL1"><span class="kbd">1</span> מה זה אימון?</button>
-          <button class="btn" data-open-link="REEL2"><span class="kbd">2</span> אירוע → תגובה</button>
-          <button class="btn" data-open-link="REEL3"><span class="kbd">3</span> מתנה לפרישה</button>
-          <button class="btn" data-open-link="REEL4"><span class="kbd">4</span> מה אתה עושה…</button>
-        </div>
-        <p class="muted" style="margin-top:10px">Esc לסגירה</p>
+      <div style="padding:26px 22px 18px; text-align:center">
+        <h2 style="margin:0 0 8px;font-size:clamp(22px,3vw,28px)">סרטונים — Reels</h2>
+        <p class="muted" style="margin:0">בחר במספר במקלדת: 1/2/3/4 • <span dir="ltr">Esc</span> לחזרה</p>
       </div>
     </div>
   </section>
@@ -175,10 +146,10 @@
   <section id="talk-safety" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
-        <button class="btn" data-close>סיום</button>
+        <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="הרצאה — תרבות הבטיחות">השארת פרטים</button>
       </div>
-      <img src="SAFETY.jpg?v=PTM2" alt="Safety Culture">
+      <img src="SAFETY.jpg?v=PTM3" alt="Safety Culture">
     </div>
   </section>
 
@@ -186,10 +157,10 @@
   <section id="talk-life" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
-        <button class="btn" data-close>סיום</button>
+        <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="שיחה — התפקחות מאשליות החיים">השארת פרטים</button>
       </div>
-      <img src="THATS LIFE.jpg?v=PTM2" alt="That's Life">
+      <img src="THATS LIFE.jpg?v=PTM3" alt="That's Life">
     </div>
   </section>
 
@@ -197,14 +168,10 @@
   <section id="book-worn" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
-        <button class="btn" data-close>סיום</button>
+        <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="ספר — כנפיים שחוקות">השארת פרטים</button>
       </div>
-      <img src="WORN WINGS.jpg?v=PTM2" alt="Worn Wings">
-      <div class="numbar">
-        <div class="chip" role="button" tabindex="0" data-open-link="WORN_SECURE"><span class="kbd">1</span> רכישה מאובטחת</div>
-        <div class="chip" role="button" tabindex="0" data-open-link="WORN_IBRIT"><span class="kbd">2</span> אתר ׳עברית׳</div>
-      </div>
+      <img src="WORN WINGS.jpg?v=PTM3" alt="Worn Wings">
     </div>
   </section>
 
@@ -212,13 +179,10 @@
   <section id="book-wings" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
-        <button class="btn" data-close>סיום</button>
+        <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="ספר — כנפיים">השארת פרטים</button>
       </div>
-      <img src="WINGS.jpg?v=PTM2" alt="Wings">
-      <div class="numbar">
-        <div class="chip" role="button" tabindex="0" data-open="#book-wings"><span class="kbd">1</span> צפייה בתמונה</div>
-      </div>
+      <img src="WINGS.jpg?v=PTM3" alt="Wings">
     </div>
   </section>
 
@@ -226,13 +190,10 @@
   <section id="book-twins" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
-        <button class="btn" data-close>סיום</button>
+        <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="ספר — צמד חמד">השארת פרטים</button>
       </div>
-      <img src="TWINS.jpg?v=PTM2" alt="Twins">
-      <div class="numbar">
-        <div class="chip" role="button" tabindex="0" data-open-link="TWINS_SECURE"><span class="kbd">1</span> רכישה מאובטחת</div>
-      </div>
+      <img src="TWINS.jpg?v=PTM3" alt="Twins">
     </div>
   </section>
 
@@ -252,7 +213,20 @@
         </div>
         <div>
           <label for="email">מייל</label>
-          <input id="email" name="em
+          <input id="email" name="email" type="email" placeholder="name@example.com"/>
+        </div>
+      </div>
+
+      <label for="message">הודעה</label>
+      <textarea id="message" name="message" placeholder="פרטים חופשיים..."></textarea>
+
+      <div class="form-actions">
+        <button type="submit" class="btn primary">שליחה</button>
+        <button type="button" class="btn" id="cancelForm">ביטול</button>
+      </div>
+      <p class="note muted">הטופס נשלח במייל (mailto) — ללא שרת.</p>
+    </form>
+  </section>
   <script>
   const $ = (s)=>document.querySelector(s);
 
@@ -276,7 +250,7 @@
   };
 
   // קישורים חיצוניים
- const LINKS = {
+  const LINKS = {
     WORN_SECURE: 'https://meshulam.co.il/purchase?b=8dfe116b4b9a656246375c897a49d9a4&fbclid=IwY2xjawMk4G9leHRuA2FlbQIxMABicmlkETFZZnB2Nng2YkMwRHpaNkY5AR71cWa5G75BBBYf3k6ldZ-gj1lPlOyJAFQo2M8Tnn8zFLwVJbWeVNdD6DXHng_aem_Vcth-GPqGkc0nkjqNEbYjg',
     WORN_IBRIT:  'https://www.e-vrit.co.il/Product/23651/%D7%9B%D7%A0%D7%A4%D7%99%D7%99%D7%9D_%D7%A9%D7%97%D7%95%D7%A7%D7%95%D7%AA',
     TWINS_SECURE:'https://meshulam.co.il/purchase?b=cdb8abab38e7c0d22aa888136a3e4515&fbclid=IwY2xjawMk4L1leHRuA2FlbQIxMABicmlkETFZZnB2Nng2YkMwRHpaNkY5AR71cWa5G75BBBYf3k6ldZ-gj1lPlOyJAFQo2M8Tnn8zFLwVJbWeVNdD6DXHng_aem_Vcth-GPqGkc0nkjqNEbYjg',
@@ -286,49 +260,91 @@
     REEL4: 'https://www.facebook.com/reel/1081715494101033'
   };
 
-  let active = null;  // overlay פתוח
-  let lastOrigin = '';
+  // ניהול היסטוריית מסכים (Back)
+  let active = null;        // overlay פתוח כרגע
+  const historyStack = [];  // מחסנית מסכים קודמים
 
-  function openOverlay(el){ if(active) closeOverlay(); el.classList.add('active'); active = el; }
-  function closeOverlay(){ if(active){ active.classList.remove('active'); active = null; } }
+  function show(el){ el.classList.add('active'); }
+  function hide(el){ el.classList.remove('active'); }
 
-  // צ'יפים עם data-open → פותחים חלון
-  document.querySelectorAll('.chip[data-open]').forEach(ch=>{
-    const go = ()=>{ const sel = ch.getAttribute('data-open'); const el = document.querySelector(sel); if(el) openOverlay(el); };
-    ch.addEventListener('click', go);
-    ch.addEventListener('keydown', (e)=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); go(); }});
+  function openOverlay(el){
+    if(active){ historyStack.push(active); hide(active); }
+    show(el);
+    active = el;
+  }
+
+  function goBack(){
+    // אם טופס פתוח – חזור ממנו בלבד
+    if($('#contact').classList.contains('active')) { closeForm(); return; }
+    if(!active){ return; }
+    hide(active);
+    active = historyStack.pop() || null;
+    if(active){ show(active); }
+  }
+
+  // סגירה/חזרה: כפתור "סיום" וקליק מחוץ
+  document.querySelectorAll('[data-back]').forEach(b=>b.addEventListener('click', goBack));
+  document.querySelectorAll('.overlay').forEach(ov=>{
+    ov.addEventListener('click',(ev)=>{ if(ev.target===ov) goBack(); });
   });
 
-  // פתיחת לינקים חיצוניים
-  function openLinkByKey(key){ const u = LINKS[key]; if(u && u.trim()) window.open(u,'_blank'); else alert('הקישור יתווסף בהמשך.'); }
-  document.querySelectorAll('[data-open-link]').forEach(b=>b.addEventListener('click', ()=>openLinkByKey(b.getAttribute('data-open-link'))));
-
-  // סגירה בלחיצה מחוץ
-  document.querySelectorAll('.overlay').forEach(ov=>ov.addEventListener('click',(ev)=>{ if(ev.target===ov) closeOverlay(); }));
-
-  // כפתורי סיום/טופס
-  document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click', closeOverlay));
-  document.querySelectorAll('[data-contact]').forEach(b=>b.addEventListener('click', ()=>{ lastOrigin=b.getAttribute('data-origin')||''; openForm(lastOrigin); }));
+  // פתיחת טופס
+  let lastOrigin = '';
+  document.querySelectorAll('[data-contact]').forEach(b=>b.addEventListener('click', ()=>{
+    lastOrigin = b.getAttribute('data-origin') || '';
+    openForm(lastOrigin);
+  }));
 
   // מקלדת
   window.addEventListener('keydown',(e)=>{
-    if(e.key==='Escape'){ if($('#contact').classList.contains('active')){ closeForm(); return; } closeOverlay(); return; }
+    if(e.key==='Escape'){ goBack(); return; }
+
+    // בית → בחירה ראשית
     if(!active && ['1','2','3'].includes(e.key)){ e.preventDefault(); openOverlay(overlays[e.key]); return; }
 
     // PT MASTER
-    if(active===overlays['1']){ if(e.key==='1') openOverlay(modals.pts); if(e.key==='2') openOverlay(modals.pt); }
+    if(active===overlays['1']){
+      if(e.key==='1') openOverlay(modals.pts);
+      if(e.key==='2') openOverlay(modals.pt);
+    }
+
     // PT
-    if(active===modals.pt){ if(e.key==='1') openOverlay(modals.pts); if(e.key==='2') openOverlay(modals.reels); }
+    if(active===modals.pt){
+      if(e.key==='1') openOverlay(modals.pts);
+      if(e.key==='2') openOverlay(modals.reels);
+    }
+
     // TALKS
-    if(active===overlays['2']){ if(e.key==='1') openOverlay(modals.talkSafety); if(e.key==='2') openOverlay(modals.talkLife); }
-    // BOOKS
-    if(active===overlays['3']){ if(e.key==='1') openOverlay(modals.bookWorn); if(e.key==='2') openOverlay(modals.bookWings); if(e.key==='3') openOverlay(modals.bookTwins); }
-    // ספרים ספציפי
-    if(active===modals.bookWorn){ if(e.key==='1') openLinkByKey('WORN_SECURE'); if(e.key==='2') openLinkByKey('WORN_IBRIT'); }
-    if(active===modals.bookTwins && e.key==='1'){ openLinkByKey('TWINS_SECURE'); }
-    // Reels
-    if(active===modals.reels && ['1','2','3','4'].includes(e.key)){ openLinkByKey('REEL'+e.key); }
+    if(active===overlays['2']){
+      if(e.key==='1') openOverlay(modals.talkSafety);
+      if(e.key==='2') openOverlay(modals.talkLife);
+    }
+
+    // BOOKS (תוקן: 1=WORN, 2=TWINS, 3=WINGS)
+    if(active===overlays['3']){
+      if(e.key==='1') openOverlay(modals.bookWorn);
+      if(e.key==='2') openOverlay(modals.bookTwins);
+      if(e.key==='3') openOverlay(modals.bookWings);
+    }
+
+    // פעולות פנימיות
+    if(active===modals.bookWorn){
+      if(e.key==='1') openExternal('WORN_SECURE');
+      if(e.key==='2') openExternal('WORN_IBRIT');
+    }
+    if(active===modals.bookTwins && e.key==='1'){
+      openExternal('TWINS_SECURE');
+    }
+    if(active===modals.reels && ['1','2','3','4'].includes(e.key)){
+      openExternal('REEL'+e.key);
+    }
   });
+
+  function openExternal(key){
+    const url = LINKS[key];
+    if(url && url.trim()) window.open(url, '_blank');
+    else alert('הקישור יתווסף בהמשך.');
+  }
 
   // טופס (mailto)
   const contactOv = $('#contact'), form = $('#contactForm'), ctxLine = $('#contextLine');
@@ -349,3 +365,4 @@
   </script>
 </body>
 </html>
+
