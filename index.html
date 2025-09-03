@@ -29,7 +29,7 @@
     .overlay.active{display:flex}
     @keyframes fade{from{opacity:0}to{opacity:1}}
 
-    /* פנל תמונה – בלי חיתוך, במרכז, כפתורים מעל */
+    /* פנל תמונה – בלי חיתוך, כפתורים מעל */
     .panel{
       position:relative;display:flex;align-items:center;justify-content:center;
       width:min(96vw,1200px);max-height:92vh;border-radius:18px;overflow:hidden;
@@ -60,11 +60,11 @@
   </style>
 </head>
 <body>
-  <div class="build">BUILD: PTM-3</div>
+  <div class="build">BUILD: PTM-4</div>
 
   <!-- מסך הבית -->
   <main class="stage" aria-label="Master Page">
-    <img src="MASTER PAGE.jpg?v=PTM3" alt="דורון דנאי — מסך ראשי">
+    <img src="MASTER PAGE.jpg?v=PTM4" alt="דורון דנאי — מסך ראשי">
   </main>
 
   <div class="hints" aria-hidden="true">
@@ -81,7 +81,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="אימון אישי — PT MASTER">השארת פרטים</button>
       </div>
-      <img src="PT MASTER.jpg?v=PTM3" alt="PT MASTER">
+      <img src="PT MASTER.jpg?v=PTM4" alt="PT MASTER">
     </div>
   </section>
 
@@ -92,29 +92,29 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="אימון אישי — PT">השארת פרטים</button>
       </div>
-      <img src="PT.jpg?v=PTM3" alt="PT">
+      <img src="PT.jpg?v=PTM4" alt="PT">
     </div>
   </section>
 
-  <!-- TALKS -->
+  <!-- TALKS (1=SAFETY, 2=THATS LIFE) -->
   <section id="ov-talks" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="הרצאות ושיחות — מסך בחירה">השארת פרטים</button>
       </div>
-      <img src="TALKS MASTER.jpg?v=PTM3" alt="Talks">
+      <img src="TALKS MASTER.jpg?v=PTM4" alt="Talks">
     </div>
   </section>
 
-  <!-- BOOKS -->
+  <!-- BOOKS (1=WORN, 2=TWINS, 3=WINGS) -->
   <section id="ov-books" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="ספרים — מסך בחירה">השארת פרטים</button>
       </div>
-      <img src="MASTER BOOKS.jpg?v=PTM3" alt="Books">
+      <img src="MASTER BOOKS.jpg?v=PTM4" alt="Books">
     </div>
   </section>
   <!-- PT ► PTS -->
@@ -124,11 +124,11 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="אימון אישי — הצעה מיוחדת">השארת פרטים</button>
       </div>
-      <img src="PTS.jpg?v=PTM3" alt="PTS">
+      <img src="PTS.jpg?v=PTM4" alt="PTS">
     </div>
   </section>
 
-  <!-- PT ► REELS (רק מקשים 1..4, ללא כפתורי בחירה) -->
+  <!-- PT ► REELS (בחירה רק מהמקלדת 1..4) -->
   <section id="ov-reels" class="overlay" role="dialog" aria-modal="true">
     <div class="panel" style="background:#111;color:#fff">
       <div class="controls">
@@ -149,7 +149,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="הרצאה — תרבות הבטיחות">השארת פרטים</button>
       </div>
-      <img src="SAFETY.jpg?v=PTM3" alt="Safety Culture">
+      <img src="SAFETY.jpg?v=PTM4" alt="Safety Culture">
     </div>
   </section>
 
@@ -160,7 +160,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="שיחה — התפקחות מאשליות החיים">השארת פרטים</button>
       </div>
-      <img src="THATS LIFE.jpg?v=PTM3" alt="That's Life">
+      <img src="THATS LIFE.jpg?v=PTM4" alt="That's Life">
     </div>
   </section>
 
@@ -171,7 +171,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="ספר — כנפיים שחוקות">השארת פרטים</button>
       </div>
-      <img src="WORN WINGS.jpg?v=PTM3" alt="Worn Wings">
+      <img src="WORN WINGS.jpg?v=PTM4" alt="Worn Wings">
     </div>
   </section>
 
@@ -182,7 +182,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="ספר — כנפיים">השארת פרטים</button>
       </div>
-      <img src="WINGS.jpg?v=PTM3" alt="Wings">
+      <img src="WINGS.jpg?v=PTM4" alt="Wings">
     </div>
   </section>
 
@@ -193,7 +193,7 @@
         <button class="btn" data-back>סיום</button>
         <button class="btn" data-contact data-origin="ספר — צמד חמד">השארת פרטים</button>
       </div>
-      <img src="TWINS.jpg?v=PTM3" alt="Twins">
+      <img src="TWINS.jpg?v=PTM4" alt="Twins">
     </div>
   </section>
 
@@ -260,9 +260,9 @@
     REEL4: 'https://www.facebook.com/reel/1081715494101033'
   };
 
-  // ניהול היסטוריית מסכים (Back)
-  let active = null;        // overlay פתוח כרגע
-  const historyStack = [];  // מחסנית מסכים קודמים
+  // היסטוריה (Back) + מצב נוכחי
+  let active = null;                // overlay פתוח כרגע
+  const historyStack = [];          // מסכים קודמים
 
   function show(el){ el.classList.add('active'); }
   function hide(el){ el.classList.remove('active'); }
@@ -274,7 +274,7 @@
   }
 
   function goBack(){
-    // אם טופס פתוח – חזור ממנו בלבד
+    // אם טופס פתוח – קודם לסגור אותו
     if($('#contact').classList.contains('active')) { closeForm(); return; }
     if(!active){ return; }
     hide(active);
@@ -295,48 +295,59 @@
     openForm(lastOrigin);
   }));
 
-  // מקלדת
+  // מקלדת — כל הניווט
   window.addEventListener('keydown',(e)=>{
     if(e.key==='Escape'){ goBack(); return; }
 
     // בית → בחירה ראשית
-    if(!active && ['1','2','3'].includes(e.key)){ e.preventDefault(); openOverlay(overlays[e.key]); return; }
+    if(!active && ['1','2','3'].includes(e.key)){
+      e.preventDefault();
+      openOverlay(overlays[e.key]); 
+      return;
+    }
 
     // PT MASTER
     if(active===overlays['1']){
-      if(e.key==='1') openOverlay(modals.pts);
-      if(e.key==='2') openOverlay(modals.pt);
+      if(e.key==='1'){ e.preventDefault(); openOverlay(modals.pts); }
+      if(e.key==='2'){ e.preventDefault(); openOverlay(modals.pt); }
+      return;
     }
 
     // PT
     if(active===modals.pt){
-      if(e.key==='1') openOverlay(modals.pts);
-      if(e.key==='2') openOverlay(modals.reels);
+      if(e.key==='1'){ e.preventDefault(); openOverlay(modals.pts); }
+      if(e.key==='2'){ e.preventDefault(); openOverlay(modals.reels); }
+      return;
     }
 
     // TALKS
     if(active===overlays['2']){
-      if(e.key==='1') openOverlay(modals.talkSafety);
-      if(e.key==='2') openOverlay(modals.talkLife);
+      if(e.key==='1'){ e.preventDefault(); openOverlay(modals.talkSafety); }
+      if(e.key==='2'){ e.preventDefault(); openOverlay(modals.talkLife); }
+      return;
     }
 
-    // BOOKS (תוקן: 1=WORN, 2=TWINS, 3=WINGS)
+    // BOOKS (1=WORN, 2=TWINS, 3=WINGS)
     if(active===overlays['3']){
-      if(e.key==='1') openOverlay(modals.bookWorn);
-      if(e.key==='2') openOverlay(modals.bookTwins);
-      if(e.key==='3') openOverlay(modals.bookWings);
+      if(e.key==='1'){ e.preventDefault(); openOverlay(modals.bookWorn); }
+      if(e.key==='2'){ e.preventDefault(); openOverlay(modals.bookTwins); }
+      if(e.key==='3'){ e.preventDefault(); openOverlay(modals.bookWings); }
+      return;
     }
 
     // פעולות פנימיות
     if(active===modals.bookWorn){
-      if(e.key==='1') openExternal('WORN_SECURE');
-      if(e.key==='2') openExternal('WORN_IBRIT');
+      if(e.key==='1'){ e.preventDefault(); openExternal('WORN_SECURE'); }
+      if(e.key==='2'){ e.preventDefault(); openExternal('WORN_IBRIT'); }
+      return;
     }
-    if(active===modals.bookTwins && e.key==='1'){
-      openExternal('TWINS_SECURE');
+    if(active===modals.bookTwins){
+      if(e.key==='1'){ e.preventDefault(); openExternal('TWINS_SECURE'); }
+      return;
     }
     if(active===modals.reels && ['1','2','3','4'].includes(e.key)){
-      openExternal('REEL'+e.key);
+      e.preventDefault(); openExternal('REEL'+e.key); 
+      return;
     }
   });
 
@@ -365,4 +376,3 @@
   </script>
 </body>
 </html>
-
