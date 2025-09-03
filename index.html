@@ -4,6 +4,10 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>דורון דנאי — אתר אישי</title>
+
+  <!-- SEO בסיסי (לא חובה לשנות כרגע) -->
+  <meta name="description" content="דורון דנאי — אימון אישי, הרצאות וספרים. יצירת קשר: danaydoron@gmail.com">
+
   <style>
     :root{
       --bg:#000; --ov:rgba(0,0,0,.75);
@@ -13,25 +17,38 @@
     *{box-sizing:border-box}
     html,body{margin:0;height:100%;background:#000;
       font-family:system-ui,"Segoe UI",Arial,Helvetica,sans-serif}
+
+    /* מסך הבית: תמיד מציג את כל התמונה בלי חיתוך */
     .stage{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden;background:#000}
-    .stage>img{width:100%;height:auto;max-width:1800px;display:block}
+    .stage>img{width:100vw;height:100vh;object-fit:contain;display:block}
+
+    /* רמזי מקשים בתחתית */
     .hints{position:fixed;bottom:14px;left:14px;right:14px;display:flex;gap:18px;justify-content:center;flex-wrap:wrap;background:rgba(0,0,0,.45);color:#fff;border-radius:12px;padding:10px 14px;backdrop-filter:blur(4px);font-size:14px}
     .kbd{display:inline-flex;min-width:1.9em;justify-content:center;align-items:center;padding:2px 8px;border-radius:8px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);font-weight:700;margin-inline:6px}
 
-    /* Overlay */
+    /* חלונות קופצים */
     .overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:var(--ov);animation:fade .18s ease-out}
     .overlay.active{display:flex}
     @keyframes fade{from{opacity:0}to{opacity:1}}
-    .panel{position:relative;width:min(96vw,1200px);max-height:92vh;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 10px 30px rgba(0,0,0,.4)}
-    .panel img{display:block;width:100%;height:auto}
-    .controls{position:absolute;top:10px;left:10px;display:flex;gap:8px;z-index:3}
-    .btn{appearance:none;border:1px solid var(--btnbr);background:var(--btnbg);color:var(--btn);padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer;backdrop-filter:blur(2px)}
+
+    /* פנל תמונה: לא חותך, במרכז, עם מקום לכפתורים */
+    .panel{
+      position:relative;display:flex;align-items:center;justify-content:center;
+      width:min(96vw,1200px);max-height:92vh;border-radius:18px;overflow:hidden;
+      background:#000;box-shadow:0 10px 30px rgba(0,0,0,.4)
+    }
+    .panel img{max-width:100%;max-height:88vh;width:auto;height:auto;object-fit:contain;display:block}
+
+    /* כפתורי שליטה */
+    .controls{position:absolute;top:10px;left:10px;display:flex;gap:8px;z-index:5}
+    .btn{appearance:none;border:1px solid var(--btnbr);background:var(--btnbg);color:var(--btn);
+      padding:8px 12px;border-radius:10px;font-weight:700;cursor:pointer;backdrop-filter:blur(2px)}
     .btn:hover{background:rgba(255,255,255,.12)}
 
-    /* בר בחירה עם מספרים קליקים */
-    .numbar{position:absolute;bottom:10px;left:10px;right:10px;display:flex;gap:12px;justify-content:center;background:rgba(0,0,0,.45);border-radius:12px;padding:8px 12px;color:#fff;font-size:14px;z-index:2}
-    .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 10px;cursor:pointer;background:rgba(255,255,255,.14)}
-    .bubble{display:inline-flex;justify-content:center;align-items:center;width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.5);font-weight:700}
+    /* שורת בחירה במספרים (קליקה על המסך + מקלדת) */
+    .numbar{position:absolute;bottom:10px;left:10px;right:10px;display:flex;gap:12px;justify-content:center;background:rgba(0,0,0,.45);border-radius:12px;padding:8px 12px;color:#fff;font-size:14px;z-index:4}
+    .chip{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:6px 10px;background:rgba(255,255,255,.14);cursor:pointer;user-select:none}
+    .chip:focus,.chip:hover{outline:2px solid rgba(255,255,255,.5)}
 
     /* טופס יצירת קשר */
     .form-ov{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:var(--ov)}
@@ -61,22 +78,37 @@
     <span class="muted">סגירה: <span class="kbd">Esc</span></span>
   </div>
 
-  <!-- PT (מסך בחירה: 1=PTS, 2=REELS) -->
-  <section id="ov-pt" class="overlay" role="dialog" aria-modal="true">
+  <!-- PT MASTER (חדש: 1→PTS, 2→PT) -->
+  <section id="ov-ptmaster" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
         <button class="btn" data-close>סיום</button>
-        <button class="btn" data-contact data-origin="אימון אישי — מסך בחירה">השארת פרטים</button>
+        <button class="btn" data-contact data-origin="אימון אישי — מסך PT MASTER">השארת פרטים</button>
       </div>
-      <img src="PT.jpg" alt="אימון אישי — PT">
+      <img src="PT MASTER.jpg" alt="אימון אישי — PT MASTER">
       <div class="numbar">
-        <div class="chip" data-open="#ov-pts"><span class="bubble">1</span> הצעה מיוחדת</div>
-        <div class="chip" data-open="#ov-reels"><span class="bubble">2</span> סרטונים Reels</div>
+        <div class="chip" role="button" tabindex="0" data-open="#ov-pts"><span class="kbd">1</span> הצעה מיוחדת</div>
+        <div class="chip" role="button" tabindex="0" data-open="#ov-pt"><span class="kbd">2</span> סרטונים (דרך PT)</div>
       </div>
     </div>
   </section>
 
-  <!-- TALKS (מסך בחירה: 1=SAFETY, 2=THATS LIFE) -->
+  <!-- PT (כמו קודם: 1→PTS, 2→REELS) -->
+  <section id="ov-pt" class="overlay" role="dialog" aria-modal="true">
+    <div class="panel">
+      <div class="controls">
+        <button class="btn" data-close>סיום</button>
+        <button class="btn" data-contact data-origin="אימון אישי — מסך PT">השארת פרטים</button>
+      </div>
+      <img src="PT.jpg" alt="אימון אישי — PT">
+      <div class="numbar">
+        <div class="chip" role="button" tabindex="0" data-open="#ov-pts"><span class="kbd">1</span> הצעה מיוחדת</div>
+        <div class="chip" role="button" tabindex="0" data-open="#ov-reels"><span class="kbd">2</span> סרטונים Reels</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TALKS (בחירה: 1→SAFETY, 2→THATS LIFE) -->
   <section id="ov-talks" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
@@ -85,13 +117,13 @@
       </div>
       <img src="TALKS MASTER.jpg" alt="הרצאות, סדנאות, שיחות — מסך בחירה">
       <div class="numbar">
-        <div class="chip" data-open="#talk-safety"><span class="bubble">1</span> תרבות הבטיחות</div>
-        <div class="chip" data-open="#talk-life"><span class="bubble">2</span> התפקחות מאשליות החיים</div>
+        <div class="chip" role="button" tabindex="0" data-open="#talk-safety"><span class="kbd">1</span> תרבות הבטיחות</div>
+        <div class="chip" role="button" tabindex="0" data-open="#talk-life"><span class="kbd">2</span> התפקחות מאשליות החיים</div>
       </div>
     </div>
   </section>
 
-  <!-- BOOKS (מסך בחירה: 1=WORN, 2=WINGS, 3=TWINS) -->
+  <!-- BOOKS (בחירה: 1→WORN, 2→WINGS, 3→TWINS) -->
   <section id="ov-books" class="overlay" role="dialog" aria-modal="true">
     <div class="panel">
       <div class="controls">
@@ -100,9 +132,9 @@
       </div>
       <img src="MASTER BOOKS.jpg" alt="ספרים — מסך בחירה">
       <div class="numbar">
-        <div class="chip" data-open="#book-worn"><span class="bubble">1</span> כנפיים שחוקות</div>
-        <div class="chip" data-open="#book-wings"><span class="bubble">2</span> כנפיים</div>
-        <div class="chip" data-open="#book-twins"><span class="bubble">3</span> צמד חמד</div>
+        <div class="chip" role="button" tabindex="0" data-open="#book-worn"><span class="kbd">1</span> כנפיים שחוקות</div>
+        <div class="chip" role="button" tabindex="0" data-open="#book-wings"><span class="kbd">2</span> כנפיים</div>
+        <div class="chip" role="button" tabindex="0" data-open="#book-twins"><span class="kbd">3</span> צמד חמד</div>
       </div>
     </div>
   </section>
@@ -117,7 +149,7 @@
     </div>
   </section>
 
-  <!-- PT ► REELS (עם 4 קישורים) -->
+  <!-- PT ► REELS -->
   <section id="ov-reels" class="overlay" role="dialog" aria-modal="true">
     <div class="panel" style="background:#111;color:#fff">
       <div class="controls">
@@ -169,8 +201,8 @@
       </div>
       <img src="WORN WINGS.jpg" alt="כנפיים שחוקות — פרטים">
       <div class="numbar">
-        <div class="chip" data-open-link="WORN_SECURE"><span class="bubble">1</span> רכישה מאובטחת</div>
-        <div class="chip" data-open-link="WORN_IBRIT"><span class="bubble">2</span> אתר ׳עברית׳</div>
+        <div class="chip" role="button" tabindex="0" data-open-link="WORN_SECURE"><span class="kbd">1</span> רכישה מאובטחת</div>
+        <div class="chip" role="button" tabindex="0" data-open-link="WORN_IBRIT"><span class="kbd">2</span> אתר ׳עברית׳</div>
       </div>
     </div>
   </section>
@@ -184,7 +216,7 @@
       </div>
       <img src="WINGS.jpg" alt="כנפיים — פרטים">
       <div class="numbar">
-        <div class="chip" data-open="#book-wings"><span class="bubble">1</span> צפייה בתמונה</div>
+        <div class="chip" role="button" tabindex="0" data-open="#book-wings"><span class="kbd">1</span> צפייה בתמונה</div>
       </div>
     </div>
   </section>
@@ -198,12 +230,12 @@
       </div>
       <img src="TWINS.jpg" alt="צמד חמד — פרטים">
       <div class="numbar">
-        <div class="chip" data-open-link="TWINS_SECURE"><span class="bubble">1</span> רכישה מאובטחת</div>
+        <div class="chip" role="button" tabindex="0" data-open-link="TWINS_SECURE"><span class="kbd">1</span> רכישה מאובטחת</div>
       </div>
     </div>
   </section>
 
-  <!-- טופס יצירת קשר (mailto) -->
+  <!-- טופס יצירת קשר -->
   <section id="contact" class="form-ov" role="dialog" aria-modal="true">
     <form id="contactForm">
       <h2>טופס יצירת קשר</h2>
@@ -234,23 +266,23 @@
     </form>
   </section>
   <script>
-  // עזרים
   const $ = (s)=>document.querySelector(s);
 
-  // מסכים ראשיים
+  // מסכי בחירה ראשיים מהבית
   const overlays = {
-    '1': $('#ov-pt'),
+    '1': $('#ov-ptmaster'),   // חדש: PT MASTER
     '2': $('#ov-talks'),
     '3': $('#ov-books'),
   };
 
-  // מסכי משנה
+  // תתי-מסכים
   const modals = {
+    pt:  $('#ov-pt'),
     pts: $('#ov-pts'),
     reels: $('#ov-reels'),
     talkSafety: $('#talk-safety'),
-    talkLife: $('#talk-life'),
-    bookWorn: $('#book-worn'),
+    talkLife:   $('#talk-life'),
+    bookWorn:  $('#book-worn'),
     bookWings: $('#book-wings'),
     bookTwins: $('#book-twins'),
   };
@@ -268,8 +300,8 @@
     REEL4: 'https://www.facebook.com/reel/1081715494101033'
   };
 
-  let active = null;        // overlay פעיל
-  let lastOrigin = '';      // מקור לשורת ההקשר בטופס
+  let active = null;
+  let lastOrigin = '';
 
   function openOverlay(el){
     if(active) closeOverlay();
@@ -280,16 +312,24 @@
     if(active){ active.classList.remove('active'); active = null; }
   }
 
-  // פתיחה בלחיצה על "מספרים" על המסך
+  // הפעלה דרך קליק על "צ'יפים"
   document.querySelectorAll('.chip[data-open]').forEach(ch=>{
     ch.addEventListener('click', ()=> {
       const target = ch.getAttribute('data-open');
       const el = document.querySelector(target);
       if(el) openOverlay(el);
     });
+    ch.addEventListener('keydown', (e)=>{
+      if(e.key==='Enter' || e.key===' '){
+        e.preventDefault();
+        const target = ch.getAttribute('data-open');
+        const el = document.querySelector(target);
+        if(el) openOverlay(el);
+      }
+    });
   });
 
-  // פתיחת לינקים בלחיצה על "מספר" על המסך
+  // פתיחת לינקים דרך צ'יפ/כפתור
   function openLinkByKey(key){
     const url = LINKS[key];
     if(url && url.trim()) window.open(url, '_blank');
@@ -299,19 +339,19 @@
     btn.addEventListener('click', ()=> openLinkByKey(btn.getAttribute('data-open-link')));
   });
 
-  // סגירה בלחיצה מחוץ לתוכן
+  // סגירה בלחיצה מחוץ
   document.querySelectorAll('.overlay').forEach(ov=>{
     ov.addEventListener('click', (ev)=>{ if(ev.target===ov) closeOverlay(); });
   });
 
-  // כפתורי שליטה עליונים
+  // כפתורי שליטה
   document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click', closeOverlay));
   document.querySelectorAll('[data-contact]').forEach(b=>b.addEventListener('click', ()=>{
     lastOrigin = b.getAttribute('data-origin') || '';
     openForm(lastOrigin);
   }));
 
-  // מקלדת — מסך הבית
+  // מקלדת: בית → מסכי בחירה
   window.addEventListener('keydown',(e)=>{
     if(e.key === 'Escape'){
       if($('#contact').classList.contains('active')) { closeForm(); return; }
@@ -319,24 +359,28 @@
     }
     if(!active && ['1','2','3'].includes(e.key)){ e.preventDefault(); openOverlay(overlays[e.key]); return; }
 
-    // PT (בחירה)
+    // PT MASTER
     if(active === overlays['1']){
+      if(e.key==='1') openOverlay(modals.pts);
+      if(e.key==='2') openOverlay(modals.pt);
+    }
+    // PT (כמו קודם)
+    if(active === modals.pt){
       if(e.key==='1') openOverlay(modals.pts);
       if(e.key==='2') openOverlay(modals.reels);
     }
-    // TALKS (בחירה)
+    // TALKS
     if(active === overlays['2']){
       if(e.key==='1') openOverlay(modals.talkSafety);
       if(e.key==='2') openOverlay(modals.talkLife);
     }
-    // BOOKS (בחירה)
+    // BOOKS
     if(active === overlays['3']){
       if(e.key==='1') openOverlay(modals.bookWorn);
       if(e.key==='2') openOverlay(modals.bookWings);
       if(e.key==='3') openOverlay(modals.bookTwins);
     }
-
-    // ספרים — פעולות ספציפיות
+    // פעולות בספרים
     if(active === modals.bookWorn){
       if(e.key==='1') openLinkByKey('WORN_SECURE');
       if(e.key==='2') openLinkByKey('WORN_IBRIT');
@@ -344,27 +388,28 @@
     if(active === modals.bookTwins && e.key==='1'){
       openLinkByKey('TWINS_SECURE');
     }
-
-    // REELS — 1..4
+    // Reels
     if(active === modals.reels && ['1','2','3','4'].includes(e.key)){
       openLinkByKey('REEL'+e.key);
     }
   });
 
   // טופס (mailto)
-  const contactOv = $('#contact'), form = $('#contactForm'), ctxLine = $('#contextLine');
+  const contactOv = document.querySelector('#contact');
+  const form = document.querySelector('#contactForm');
+  const ctxLine = document.querySelector('#contextLine');
   function openForm(origin=''){ ctxLine.textContent = origin ? `הקשר הפניה: ${origin}` : ''; contactOv.classList.add('active'); }
   function closeForm(){ contactOv.classList.remove('active'); }
-  $('#cancelForm').addEventListener('click', closeForm);
+  document.querySelector('#cancelForm').addEventListener('click', closeForm);
   contactOv.addEventListener('click', (ev)=>{ if(ev.target===contactOv) closeForm(); });
   form.addEventListener('submit', (e)=>{
     e.preventDefault();
-    const name = $('#name').value.trim();
-    const phone = $('#phone').value.trim();
-    const email = $('#email').value.trim();
-    const msg = $('#message').value.trim();
+    const name = document.querySelector('#name').value.trim();
+    const phone = document.querySelector('#phone').value.trim();
+    const email = document.querySelector('#email').value.trim();
+    const msg = document.querySelector('#message').value.trim();
     const subject = encodeURIComponent(`פניה מהאתר — ${lastOrigin || 'ללא הקשר'}`);
-    const body = encodeURIComponent(`שם: ${name}\nטלפון: ${phone}\nמייל: ${email}\n\nהודעה:\ן${msg}`);
+    const body = encodeURIComponent(`שם: ${name}\nטלפון: ${phone}\nמייל: ${email}\n\nהודעה:\n${msg}`);
     window.location.href = `mailto:danaydoron@gmail.com?subject=${subject}&body=${body}`;
   });
 
@@ -373,3 +418,4 @@
   </script>
 </body>
 </html>
+
